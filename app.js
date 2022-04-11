@@ -1,17 +1,22 @@
 'use strict';
 
-const fib = (n) => {
-  if (n === 0) {
-    return 0;
-  } else if (n === 1) {
-    return 1;
-  } else {
-    return fib(n - 1) + fib(n - 2);
-  }
-};
+const memo = new Map();
+memo.set(0, 0);
+memo.set(1, 1);
+memo.set(2, 1);
 
-const len = 20;
+function trib(n) {
+  if (memo.has(n)) {
+    return memo.get(n);
+  } else {
+    const val = trib(n - 1) + trib(n - 2) + trib(n - 3);
+    memo.set(n, val);
+    return val;
+  }
+}
+
+const len = 100;
 
 for (let i = 0; i < len; i++) {
-  console.log(fib(i));
+  console.log(trib(i));
 }
